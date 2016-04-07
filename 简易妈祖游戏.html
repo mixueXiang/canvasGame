@@ -1,12 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>妈祖游戏</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>祖玛游戏</title>
 <style>
 *{ margin:0; padding:0; }	
 body{ background-color:pink; }
-#div1{ width:600px; margin:20px auto; background-color:white; }
+#wrapper{ width:600px; margin:20px auto; background-color:white; }
 </style>
 <script>
 	window.onload = function(){
@@ -19,35 +19,40 @@ body{ background-color:pink; }
 			
 			setInterval( function(){
 			oGC.clearRect(0,0,oC.width,oC.height);
-			
+
+			//小球经过的路径，非闭合外圆
 			oGC.beginPath();
 			oGC.arc(300,200,200,-90*Math.PI/180,180*Math.PI/180,false);
 			oGC.stroke();
-			
+
+			//小球经过的路径，非闭合内圆
 			oGC.beginPath();
 			oGC.arc(250,200,150,180*Math.PI/180,360*Math.PI/180,false);
 			oGC.stroke();
 			
+			//终点上的固定小圆
 			oGC.beginPath();
 			oGC.arc(400,200,20,0*Math.PI/180,360*Math.PI/180,false);
 			oGC.stroke();
-			
-			for(i=0; i<ball.length; i++){
+
+			//产生运动的黑球
+			for(i = 0; i < ball.length; i++){
 				oGC.beginPath();
 				oGC.moveTo(ball[i].x,ball[i].y);
 				oGC.arc(ball[i].x,ball[i].y,20,0*Math.PI/180,360*Math.PI/180,false);
 				oGC.fill();
-				}
-				
+			}
+				//translate每次平移之后会累加，通过save()，restore()将它保存在独立的空间，相当于局部变量
 				oGC.save();
 				oGC.translate(300,200);
 				oGC.rotate(iRotate);
+				//让中间的图片围绕中心点旋转，而不是左上角
 				oGC.translate(-40,-40);
+				//将图片添加进canvas画布里
 				oGC.drawImage(oImg,0,0);
 				oGC.restore();
 				
-				for(var i=0;i<bullet.length;i++){
-				
+				for(var i = 0;i < bullet.length; i++){
 				oGC.save();
 				oGC.fillStyle = 'red';
 				oGC.beginPath();
@@ -71,51 +76,51 @@ body{ background-color:pink; }
 			oGC.restore();
 				
 		},1000/60);
-		
+
+		//让产生的小球沿着圆的路径做圆周运动
 		setInterval(function(){
-				for(var i=0;i<ball.length;i++){
+				for(var i = 0; i < ball.length; i++){
 				ball[i].num++;
+				//当小球运动到270度时，改变路径（从大圆转到小圆）
 				if(ball[i].num == 270){
 						ball[i].r = 150;
 						ball[i].startX = 250;
 						ball[i].startY = 50;
 					}
+				//当小球到达终点时，游戏结束并重新加载页面	
 				if(ball[i].num == 270+180){
 						alert('Game is over');
 						window.location.reload();
-					}	
-				ball[i].x = ball[i].r*Math.sin(ball[i].num*Math.PI/180)+ball[i].startX;
-				ball[i].y = ball[i].r-ball[i].r*Math.cos(ball[i].num*Math.PI/180)+ball[i].startY;}
+					}
+				// 小球每次移动之后的坐标		
+				ball[i].x = ball[i].r*Math.sin(ball[i].num*Math.PI/180) + ball[i].startX;
+				ball[i].y = ball[i].r - ball[i].r*Math.cos(ball[i].num * Math.PI/180) + ball[i].startY;}
 				
-				for(var i=0;i<bullet.length;i++){
+				for(var i = 0; i < bullet.length; i++){
 				bullet[i].x = bullet[i].x + bullet[i].sX;
 				bullet[i].y = bullet[i].y + bullet[i].sY;
 			}
-			
-			for(var i=0;i<bullet.length;i++){
-				
-				for(var j=0;j<ball.length;j++){
-					
+			//碰撞成功即删除碰撞的两个小球
+			for(var i = 0; i<bullet.length; i++){
+				for(var j = 0;j < ball.length; j++){
 					if( pz(bullet[i].x,bullet[i].y,ball[j].x,ball[j].y) ){
-						
 						bullet.splice(i,1);
 						ball.splice(j,1);
 						break;
-						
 					}
-					
 				}
-				
 			}
 			},30);
 		
-		var ball=[];
+		var ball = [];
+		//每隔350毫秒就向ball数组添加一个小球
+		//实现路径起点连续产生小球功能
 		setInterval(function(){
 				ball.push({
-					x : 300,
-					y : 0,
-					r : 200,
-					num : 0,
+					x : 300, //小球初始坐标x，在运动过程中被改变
+					y : 0, // 小球初始坐标y，在运动过程中被改变
+					r : 200, //小球围绕圆的半径
+					num : 0, //通过num的自增控制小球运动过程中的角度
 					startX : 300,
 					startY : 0});
 			},350);
@@ -124,7 +129,7 @@ body{ background-color:pink; }
 		
 		oC.onmousemove = function(ev){
 			var ev = ev || window.event;
-			
+			//取得鼠标相对于画布的坐标
 			var x = ev.clientX - oC.offsetLeft;
 			var y = ev.clientY - oC.offsetTop;
 			
@@ -132,25 +137,25 @@ body{ background-color:pink; }
 			var b = y - 200;
 			
 			var c = Math.sqrt(a*a + b*b);
-			
-			if(a>0 && b>0){
+			//判断鼠标位于中央图片的哪个方向，得到旋转的弧度
+			if(a > 0 && b > 0){
 				iRotate = Math.asin(b/c) + 90*Math.PI/180;
 			}
-			else if(a>0){
+			else if(a > 0){
 				iRotate = Math.asin(a/c);
 			}
 			
-			if(a<0 && b>0){
+			if(a < 0 && b > 0){
 				iRotate = -(Math.asin(b/c) + 90*Math.PI/180);
 			}
-			else if(a<0){
+			else if(a < 0){
 				iRotate = Math.asin(a/c);
 			}
 			
 		};
 		
 		var bullet = [];
-		
+		//按下鼠标即发射鼠标方向的红球
 		oC.onmousedown = function(ev){
 			var ev = ev || window.event;
 			
@@ -177,7 +182,7 @@ body{ background-color:pink; }
 		};
 		
 	};
-	
+	//小球的碰撞检测方法
 	function pz(x1,y1,x2,y2){
 		
 		var a = x1 - x2;
@@ -192,13 +197,13 @@ body{ background-color:pink; }
 			return false;
 		}
 		
-			};
 	};
+};
 </script>
 </head>
 
 <body>
-	<div id="div1">
+	<div id="wrapper">
     	<canvas id="c1" width="600" height="600">
         	<p>该浏览器暂不支持canvas</p>
         </canvas>
