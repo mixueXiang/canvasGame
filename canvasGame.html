@@ -2,11 +2,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<title>祖玛游戏</title>
+<title></title>
 <style>
 *{ margin:0; padding:0; }	
-body{ background-color:pink; }
-#wrapper{ width:600px; margin:20px auto; background-color:white; }
+body{ background-color:black; }
+#wrapper{ width:600px; margin:20px auto; background-color:white;}
 </style>
 <script>
 	window.onload = function(){
@@ -14,7 +14,7 @@ body{ background-color:pink; }
 		var oGC = oC.getContext('2d');
 		var i = 0;
 		var oImg = new Image();
-		oImg.src = "person.png";
+		oImg.src = "pet.png";
 		oImg.onload = function(){
 			
 			setInterval( function(){
@@ -46,12 +46,12 @@ body{ background-color:pink; }
 				oGC.save();
 				oGC.translate(300,200);
 				oGC.rotate(iRotate);
-				//让中间的图片围绕中心点旋转，而不是左上角
+				//让中间的萌宠围绕中心点旋转，而不是左上角
 				oGC.translate(-40,-40);
-				//将图片添加进canvas画布里
+				//将萌宠图片添加进canvas画布里
 				oGC.drawImage(oImg,0,0);
 				oGC.restore();
-				
+				//创建子弹
 				for(var i = 0;i < bullet.length; i++){
 				oGC.save();
 				oGC.fillStyle = 'red';
@@ -61,7 +61,7 @@ body{ background-color:pink; }
 				oGC.fill();
 				oGC.restore();
 			}
-			
+			//文字说明
 			oGC.save();
 			oGC.font = '60px impact';
 			oGC.textBaseline = 'top';
@@ -70,9 +70,9 @@ body{ background-color:pink; }
 			oGC.shadowOffsetY = 10;
 			oGC.shadowColor = 'green';
 			oGC.shadowBlur = 5;
-			var w = oGC.measureText('简易祖玛').width;
+			var w = oGC.measureText('旋转消消乐').width;
 			var h = 60;
-			oGC.fillText('简易祖玛', (oC.width - w)/2 , 450 );
+			oGC.fillText('旋转消消乐', (oC.width - w)/2 , 450 );
 			oGC.restore();
 				
 		},1000/60);
@@ -92,15 +92,15 @@ body{ background-color:pink; }
 						alert('Game is over');
 						window.location.reload();
 					}
-				// 小球每次移动之后的坐标		
+				// 小球运动过程的坐标		
 				ball[i].x = ball[i].r*Math.sin(ball[i].num*Math.PI/180) + ball[i].startX;
 				ball[i].y = ball[i].r - ball[i].r*Math.cos(ball[i].num * Math.PI/180) + ball[i].startY;}
-				
+				//子弹运动过程的坐标
 				for(var i = 0; i < bullet.length; i++){
 				bullet[i].x = bullet[i].x + bullet[i].sX;
 				bullet[i].y = bullet[i].y + bullet[i].sY;
 			}
-			//碰撞成功即删除碰撞的两个小球
+			//碰撞成功即删除发生碰撞的两个小球
 			for(var i = 0; i<bullet.length; i++){
 				for(var j = 0;j < ball.length; j++){
 					if( pz(bullet[i].x,bullet[i].y,ball[j].x,ball[j].y) ){
@@ -155,7 +155,7 @@ body{ background-color:pink; }
 		};
 		
 		var bullet = [];
-		//按下鼠标即发射鼠标方向的红球
+		//按下鼠标即发射鼠标方向的子弹
 		oC.onmousedown = function(ev){
 			var ev = ev || window.event;
 			
@@ -182,7 +182,7 @@ body{ background-color:pink; }
 		};
 		
 	};
-	//小球的碰撞检测方法
+	//小球的碰撞检测
 	function pz(x1,y1,x2,y2){
 		
 		var a = x1 - x2;
