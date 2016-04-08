@@ -1,4 +1,2 @@
-# an-easy-mazu-game
-An easy mazu game using canvas
-界面展示：
-![mazu](http://img.blog.csdn.net/20160407143907153?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+# 
+This is an easy game using canvas，you can click the adorable pet in the center of the canvas to fire bullets, then the black balls going round in a circle perhaps run into the bullets, the ball crashed into the ballet will disappear. When one of the balls arrive in the end of path,game is over.
