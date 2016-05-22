@@ -1,0 +1,48 @@
+@charset "utf-8";
+/* CSS Document */
+/* 
+	时间：2016.01
+    内容：旋转消消乐游戏结束页面样式表
+*/
+html {
+	height:100%; 
+	font-size:62.5%;
+}
+body{ 
+	margin:0; padding:0;
+	background-color:pink; 
+	background:url(../image/gameEnd_bg.jpg) no-repeat ; 
+	background-size:cover;
+	display: flex;
+    justify-content: center;
+    align-items:center;
+    height:100%;
+}
+
+@media (min-width:320px){
+    #wrapper {font-size:0.6em; } 
+}
+@media (min-width:960px){ 
+	#wrapper {font-size:1em; } 
+}
+@media (min-width:1024px){ 
+	#wrapper {font-size:1em; }
+}
+#c1 { 
+	width:60em; 
+	height:60em;
+}
+#wrapper{ 
+	width:60em; 
+	margin:2em auto;
+}
+#saveTime { 
+	width:5em; height:3em; 
+	display:inline-block; 
+	margin-left:5em; margin-top:5em;
+	line-height:3em; 
+	padding:5px; 
+	border:2px solid green; 
+	border-radius:5px; 
+	text-align:center;
+}

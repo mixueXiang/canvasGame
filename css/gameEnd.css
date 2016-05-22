@@ -1,0 +1,78 @@
+@charset "utf-8";
+/* CSS Document */
+/* 
+	时间：2016.01
+    内容：旋转消消乐游戏结束页面样式表
+*/
+
+/* game end */
+
+html {
+	font-size:100%; 
+    height:100%;/*辅助align-items:center实现子元素垂直居中*/
+}
+body { 
+	background:url(../image/gameEnd_bg.jpg) no-repeat ; 
+	background-size:cover;
+	display: flex;
+    justify-content: center;
+    align-items: center; 
+    height:100%;
+}
+
+/* 媒体查询实现响应式布局 */
+@media (min-width:320px){
+	#e_content {font-size:0.3em; }
+	#grade-wrapper {width:40.75em;  padding:5.25em 2.5em;}
+}
+@media (min-width:960px){
+	#e_content {font-size:0.5em;}
+	#grade-wrapper {width:30em;  padding:4em 2em;} 
+}
+@media (min-width:1024px){
+	#e_content {font-size:0.4em; /* padding-bottom:10em; */}
+	#grade-wrapper {width:30em;  padding:4em 2em;} 
+}
+#e_content {
+	display:flex; 
+	flex-direction:column; 
+	justify-content:center; 
+	align-items:center; 
+}
+#grade-wrapper {
+	margin:0 auto; 
+	background-color:#93caff;  
+	text-align:center;
+}
+#grade { 
+	color:#ff6f36; 
+	font-size:5.625em;
+}
+#info { 
+	color:#2874ef; 
+	font-size:4.375em; 
+}
+.e_button {
+	font-size: 4.375em; 
+	width:9.6em; 
+	line-height:2.06em; 
+	cursor:pointer; 
+	background:url(../image/game_btn.png) no-repeat center;  
+	text-align:center; margin:auto; 
+}
+.e_button a {
+	display:block; 
+	color:white; 
+	text-decoration:none;
+}
+#e_again {
+	margin-top:0.786em; 
+}
+#e_show {
+	margin-top:0.5em; 
+} 
+h1 {
+	font-size:22px; 
+	color:red;
+}
+/* end game end */
